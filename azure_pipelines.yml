@@ -1,0 +1,29 @@
+trigger:
+- main   # Run pipeline when pushing to main branch
+
+pool:
+  vmImage: 'window-latest'   # Uses Microsoft-hosted agent pool
+
+steps:
+# Step 1: Install Node.js
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+# Step 2: Install dependencies
+- script: |
+    npm install
+  displayName: 'Install dependencies'
+
+# Step 3: Run tests (optional)
+- script: |
+    echo "No tests, just hello app"
+  displayName: 'Run tests'
+
+# Step 4: Deploy to Azure Web App
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'WEB_APP_SC'
+    appName: 'myhellowebapp123'
+    package: '$(System.DefaultWorkingDirectory)'
