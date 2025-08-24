@@ -2,7 +2,7 @@ trigger:
 - main   # Run pipeline when pushing to main branch
 
 pool:
-  vmImage: 'window-latest'   # Uses Microsoft-hosted agent pool
+  name: 'WEBAPP_DEMO'   # Uses Microsoft-hosted agent pool
 
 steps:
 # Step 1: Install Node.js
